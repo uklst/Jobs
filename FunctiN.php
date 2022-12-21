@@ -1,6 +1,11 @@
 function sanitize_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
+  // Remove all whitespace
+  $data = preg_replace('/\s+/', '', $data);
+  // Remove all HTML tags
+  $data = strip_tags($data);
+  // Remove all non-alphanumeric characters
+  $data = preg_replace('/[^a-zA-Z0-9]/', '', $data);
+  // Convert special characters to HTML entities
   $data = htmlspecialchars($data);
   return $data;
 }
